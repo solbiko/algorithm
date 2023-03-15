@@ -53,9 +53,10 @@ while q.qsize() > 0:
         continue
     # 현재 노드 방문 처리
     visited[c_v] = True
-    for tmp in graph[c_v]:
-        next = tmp[0]
-        value = tmp[1]
+
+    for i in graph[c_v]:
+        next = i[0]
+        value = i[1]
 
         # 연결 노드의 최단거리 > 연결 노드 방문전 and 현재 노드 최단 거리 + 비용
         if distance[next] > distance[c_v] + value:
@@ -69,4 +70,3 @@ for i in range(1,v+1):
         print(distance[i])
     else:
         print("INF")
-        
