@@ -11,9 +11,12 @@ A 시작도시 B 도착도시(1~N)  C 걸린시간(-10,000~10,000)
 경로 없으면 -1 출력
 """
 
-INF = int(1e9) # 무한을 의미하는 값으로 10억을 설정
+import sys
+input = sys.stdin.readline
 
 n, m = map(int, input().split())
+
+INF = int(1e10)
 
 
 # 에지 리스트
@@ -25,7 +28,8 @@ for i in range(m):
 # print(graph)
 
 # 최단 경로 리스트
-d = [INF] * (n+1)
+d = [sys.maxsize] * (n+1)
+
 d[1] = 0
 
 # print(d)
@@ -33,17 +37,22 @@ d[1] = 0
 
 cycleYn = False
 
-for i in range(1, n+1):
+for _ in range(n-1):
     for start, end, weight in graph:
-        if d[start] != INF:
+        if d[start] != sys.maxsize:
             d[end] = d[start] + weight if d[end] > d[start] + weight else d[end]
 
 for start, end, weight in graph:
-    cycleYn = True if d[end] > d[start] + weight else False
+    if d[start] != sys.maxsize and d[end] > d[start] + weight:
+        cycleYn = True
+
+# print(d)
 
 if cycleYn:
     print(-1)
 else:
     for i in range(2, n+1):
-        if d[i] != INF:
+        if d[i] != sys.maxsize:
             print(d[i])
+        else:
+            print(-1)
