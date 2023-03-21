@@ -26,7 +26,7 @@ for i in range(1, n+1):
 
 for i in range(m):
     a, b, c = map(int, input().split())
-    if d[a][b] > 0:
+    if d[a][b] > c:
         d[a][b] = c
 
 # print(d)
