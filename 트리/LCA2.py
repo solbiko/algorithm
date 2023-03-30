@@ -37,7 +37,7 @@ visited = [False] * (N + 1)
 temp = 1
 kmax = 0 # 최대 가능 높이
 while temp <= N:
-    temp <<= 1
+    temp <<= 1 # 변수의 값을 왼쪽으로 지정된 비트 수 만큼 이동,  n << m : n * 2의 m승
     kmax += 1
 
 # 노드 조상 리스트
