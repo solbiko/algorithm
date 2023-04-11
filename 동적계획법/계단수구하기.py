@@ -13,7 +13,7 @@ for i in range(1, 10):
 for i in range(2,n+1):
     dp[i][0]=dp[i-1][1] # 0인경우 뒤에 1만 올 수 있음
     dp[i][9]=dp[i-1][8] # 9인경우 뒤에 8만 올 수 있음
-    for j in range(1,9): #1~9인경우 인접수(+-1)
+    for j in range(1,9): #1~8인경우 인접수(+-1)
         print(j)
         dp[i][j]= dp[i-1][j-1] + dp[i-1][j+1]
 
