@@ -1,5 +1,6 @@
 import sys
 from queue import PriorityQueue
+input=sys.stdin.readline
 
 # 도시개수
 n=int(input())
