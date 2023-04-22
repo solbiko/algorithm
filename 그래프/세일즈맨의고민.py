@@ -16,34 +16,32 @@ input=sys.stdin.readline
 
 # 도시수 n(1~100), 시작, 종료, 교통수단 m(1~100)
 n,s,e,m=map(int, input().split())
+graph = [] # 교통 수단 정보, 에지 리스트
+d = [-sys.maxsize]*n # 최단 경로 리스트
 
 # 교통 수단 정보, 에지 리스트
-graph = []
-for i in range(m):
+for _ in range(m):
     u, v, w = map(int, input().split())
     graph.append((u, v, w))
 
 # 각 도시에서 벌 수 있는 돈의 최댓값
 mList=list(map(int,input().split()))
 
-# 최단 경로 리스트
-d = [-sys.maxsize]*n
 d[s] = mList[s]
-
 # 변형 벨만-포드
 for i in range(n+101):
-    for s,e,p in graph:
-        if d[s]==-sys.maxsize: # 출발노드 미방문 노드
+    for start, end, price in graph:
+        if d[start]==-sys.maxsize: # 출발노드 미방문 노드
             continue
-        elif d[s]==sys.maxsize: # 출발노드가 양수 사이클에 연결된 노드
-            d[e]=sys.maxsize
-        elif d[s]-p+mList[e]>d[e]: # 종료노드값 < 출발노드값+도착도시수입+에지가중치
-            d[e]=d[s]-p+mList[e]
+        elif d[start]==sys.maxsize: # 출발노드가 양수 사이클에 연결된 노드
+            d[end]=sys.maxsize
+        elif d[end] < d[start]+mList[end]-price: # 종료노드값 < 출발노드값+도착도시수입+에지가중치
+            d[end]=d[start]+mList[end]-price
 
             # 에지 사용 횟수가 n-1을 넘어선 이후 갱신되면 양수 사이클에 연결되어 있다는 의미
             # 종료노드를 양수 사이클 연결 노드로 업데이트
             if i >= n-1:
-                d[e]=sys.maxsize
+                d[end]=sys.maxsize
 
 if d[e] == -sys.maxsize: # 도착 불가능
     print("gg")
