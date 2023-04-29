@@ -20,8 +20,8 @@ n, m = map(int, input().split())
 visited=[False]*(n+1)
 visited[1]=True
 
-res=list()
-res.append(1)
+# res=list()
+# res.append(1)
 
 cnt=0
 
@@ -43,9 +43,9 @@ def dfs(x):
         for i in range(1, n+1):
             if d[x][i] == 1 and not visited[i]:
                 visited[i] = True
-                res.append(i)
+                # res.append(i)
                 dfs(i)
-                res.pop()
+                # res.pop()
                 visited[i] = False
 
 dfs(1)
