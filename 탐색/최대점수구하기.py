@@ -16,10 +16,7 @@ N개의 문제, 풀었을 때 얻는 점수와 푸는데 걸리는 시간이 주
 
 # 문제의 개수,제한 시간
 n,m=map(int, input().split())
-
 arr=[]
-visited=[False]*(n+1)# 문제 점수, 시간
-
 
 for _ in range(n):
     s,t=map(int, input().split())
