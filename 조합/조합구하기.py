@@ -9,7 +9,9 @@ n,m=map(int,input().split())
 res=[0]*m
 total=0
 
+# 조합 : 순서 상관없이 m개 뽑음
 def dfs(x,s):
+    # s: 가지를 뻗는 첫번째 수 (for문 시작 숫자)
     global total
     if x==m:
         for i in res:
