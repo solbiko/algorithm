@@ -21,7 +21,7 @@
 """
 from collections import deque
 
-# 네 방향 탐색을 위한 상수 ← ↓ → ↑
+# 네 방향 탐색을 위한 상수
 dx=[-1,0,1,0]
 dy=[0,1,0,-1]
 
