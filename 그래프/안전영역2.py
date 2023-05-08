@@ -1,4 +1,6 @@
 import sys
+sys.setrecursionlimit(10**6)
+
 input=sys.stdin.readline
 
 # 네 방향 탐색을 위한 상수 → ↓ ← ↑
