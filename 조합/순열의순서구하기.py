@@ -14,9 +14,11 @@ import sys
 input = sys.stdin.readline
 
 # 순열의 길이
-n = int(input())
+n = int(input()) # 1~20
 
-# 팩토리얼 리스트
+# n자리로 만들 수 있는 순열의 모든 경우의 수 n!
+# 4자리=4!, 3자리=3!
+# 자릿수에 따른 순열의 경우의수를 미리 계산한 팩토리얼 리스트
 fList = [0] * 21
 fList[0] = 1
 for i in range(1, n+1):
@@ -29,58 +31,41 @@ visited = [False] * 21
 # 출력 순열 리스트
 s = [0] * 21
 
-# 입력 리스트
+# 문제종류/순열데이터 입력 리스트
 list = list(map(int, input().split()))
 
 if list[0] == 1: # 순열 출력
-    k = list[1] # 몇번째 순열을 출력할 지
 
+    k = list[1] # 몇번째 순열을 출력할 지
     for i in range(1, n+1):
         cnt = 1 # 해당 자리에서 몇 번째 숫자를 사용해야 할 지 정하는 변수
-
         for j in range(1, n+1):
-            print("i", i, ",j", j)
-
-            # 이미 사용한 숫자 계산 X
-            if visited[j]:
+            if visited[j]:  # 이미 사용한 숫자 계산 X
                 continue
-
-            # 맨 앞자리가 몇인 순열에 속하는지
-            if k <= cnt * fList[n-i]:
-                print("fList[n-i]", fList[n - i], ",cnt * fList[n-i]", cnt * fList[n-i])
-
-                # k = k- ((cnt-1) * 경우의 수)
-                k -= (cnt-1) * fList[n-i]
-
+            if k <= cnt * fList[n-i]: # 맨 앞자리가 몇인 순열에 속하는지
+                k -= (cnt-1) * fList[n-i] # k = k- ((cnt-1) * 경우의 수)
                 # 현재 자리에 j값 저장
                 s[i] = j
                 visited[j] = True
                 break
             cnt += 1
-
     # 순열 출력
     for i in range(1, n+1):
         print(s[i], end=" ")
 
 else: # 순열의 순서 출력
+
     k = 1 # 순열의 순서 저장
     for i in range(1, n+1):
         cnt = 0
-
+        # 현재 자릿수의 숫자보다 앞 숫자 중 미사용 숫자 카운트
         for j in range(1, list[i]):
-            print("i", i, ",j", j, " list[i]",  list[i])
-            print("visited[",j,"]", visited[j])
-
-            # 현재 자릿수의 숫자보다 앞 숫자 중 미사용 숫자 카운트
             if not visited[j]:
                 cnt += 1
-            print("cnt", cnt, "n-i", n-i, "fList[n-i]", fList[n-i])
-
         # 미사용 숫자 개수 * (현재자리 -1 에서 만들 수 있는 순열의 개수)를 더함
         k += cnt * fList[n-i]
-        print("k", k)
-        print()
         visited[list[i]] = True
+
     print(k)
 
 
