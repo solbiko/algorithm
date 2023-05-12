@@ -17,9 +17,7 @@ res=0
 
 for i in range(2,n+1):
     max=0
-    # print("i ", i, "arr[i] ", arr[i])
     for j in range(i-1, 0, -1):
-        # print("j ", j, "arr[j] ", arr[j])
         if arr[j]<arr[i] and d[j]>max:
             max=d[j]
     d[i]=max+1
