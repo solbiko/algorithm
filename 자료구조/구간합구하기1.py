@@ -1,3 +1,6 @@
+import sys
+input=sys.stdin.readline
+
 n,k =  map(int, input().split())
 list = list(map(int, input().split()))
 
@@ -8,8 +11,6 @@ temp = 0
 for i in list:
     temp += i
     sumList.append(temp)
-
-print(sumList)
 
 
 # 줄의 합을 구해야 하는 구간 s,e
