@@ -19,6 +19,8 @@
 19 13 30 13 19
 
 """
+import sys
+input=sys.stdin.readline
 from collections import deque
 
 # 네 방향 탐색을 위한 상수
