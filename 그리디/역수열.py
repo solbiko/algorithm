@@ -16,17 +16,18 @@ n과 1부터 n까지의 수를 사용하여 이루어진 수열의 역수열이 
 """
 n=int(input())
 a=list(map(int, input().split()))
-a.insert(0, 0)
 
-res=[0]*n
-for i in range(1,n):
+res=[0]*n # 원수열 리스트
+
+for i in range(n):
     for j in range(n):
-        if a[i] == 0 and res[j] == 0:
-            res[j] = i + 1
+        print(i, a[i], j, res[j])
+        if a[i] == 0 and res[j] == 0: # 자기 자리 찾아들어감
+            res[j]=i+1
             break
         elif res[j] == 0:
-            a[i] -= 1
+            a[i] -= 1 # 빈자리
 
-
-print(res)
+for x in res:
+    print(x, end=" ")
 
