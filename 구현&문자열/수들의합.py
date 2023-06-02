@@ -11,28 +11,26 @@ n,m = map(int, input().split())
 a = list(map(int, input().split()))
 
 # 투 포인터
-lt=0
-rt=1
-tot=a[0]
-
+l=0
+r=1
 cnt=0
 
+sum=a[0]
 while True:
-    if tot<m:
-        if rt<n:
-            tot+=a[rt]
-            rt+=1
+    if sum<m:
+        if r<n:
+            sum+=a[r]
+            r+=1
         else: # 작은데 더이상 더할 것이 없음
             break
-
-    elif tot==m:
+    elif sum==m:
         cnt+=1
         # 계속 진행해야 하기 때문에
-        tot-=a[lt]
-        lt+=1
-
+        sum-=a[l]
+        l+=1
     else:
-        tot-=a[lt]
-        lt+=1
+        sum-=a[l]
+        l+=1
+    print(sum)
 
 print(cnt)
