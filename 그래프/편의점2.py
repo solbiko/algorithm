@@ -35,34 +35,34 @@ for _ in range(m):
     graph[b].append([a, c])
 
 distance = [INF] * (n+1)
+
+# 힙
 queue = []
 
+# 다익스트라
 def dijkstra():
     while queue:
-        print(queue)
-        print(distance)
-        print()
-
         dist, now = heappop(queue)
         if distance[now] < dist:
             continue
-        for i in graph[now]:
+        for i in graph[now]: # 인접노드마다
             cost = dist + i[1]
             if distance[i[0]] > cost:
                 distance[i[0]] = cost
                 heappush(queue, (cost, i[0]))
-
 
 p, q = map(int, input().split())
 houses=list(map(int,input().split()))
 stores=list(map(int,input().split()))
 houses.sort()
 
+# 편의점마다 시작점 큐에 삽입
 for i in stores:
     heappush(queue, (0, i))
 
+# 다익스트라
 dijkstra()
-print(distance)
+
 min_dist = INF
 mid_node = 0
 
