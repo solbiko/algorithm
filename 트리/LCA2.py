@@ -76,7 +76,7 @@ def BFS(node):
             count = 0
             # 바로 아래 단계 트리 노드 개수 저장
             now_size = len(queue)
-            # 현재 depth 1 wmdrk
+            # 현재 depth 1증가
             level += 1
 
 
