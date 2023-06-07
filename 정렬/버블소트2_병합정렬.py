@@ -15,6 +15,7 @@ tmp=[0]*n  # 정렬용 임시 리스트
 
 cnt=0
 
+
 def mergeSort(s,e):
     global cnt
     if e-s<1:return
