@@ -25,7 +25,8 @@ for i in range(1,n):
         a[j]=a[j-1]
     a[insert_point]=insert_value
 
-for i in range(n):  # 합배열 만들기
+s[0]=a[0]
+for i in range(1,n):  # 합배열 만들기
     s[i]=s[i-1]+a[i]
 
 total=0
