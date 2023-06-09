@@ -30,10 +30,12 @@ pi[1,2,3,3,4]
 n=int(input())
 a=list(map(int,input().split()))
 a.sort()
+s=[0]*n  # 합배열
 
-sumVal=0
+s[0]=a[0]
+for i in range(1,n):  # 합배열 만들기
+    s[i]=s[i-1]+a[i]
 total=0
-for i in range(n):
-    sumVal+=a[i]
-    total+=sumVal
+for i in range(0,n):  # 합배열 총합 구하기
+    total+=s[i]
 print(total)
