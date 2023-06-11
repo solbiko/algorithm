@@ -1,35 +1,18 @@
+"""
+11053
+1 ≤ N ≤ 1,000
+"""
 import sys
+input = sys.stdin.readline
 
 n = int(input())
 arr = list(map(int, input().split()))
 
-d=[]
+dp = [1]*n
 
-# for i in arr:
-#     if d[-1]<i:
-#         d.append(i)
-#     else:
-#         left = 0
-#         right = len(d)
-#
-#         while left<right:
-#             mid = (right+left)//2
-#             if d[mid]<i:
-#                 left = mid+1
-#             else:
-#                 right = mid
-#         d[right] = i
-#
+for i in range(1,n):
+    for j in range(i):
+        if arr[i] > arr[j]:
+            dp[i] = max(dp[i], dp[j]+1)
 
-from bisect import bisect_left
-
-
-for i in arr:
-    k = bisect_left(d, i)
-    if len(d) == k:
-        d += [i]
-    else:
-        d[k] = i
-
-
-print(len(d))
+print(max(dp))
