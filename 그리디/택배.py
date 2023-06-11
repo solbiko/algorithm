@@ -42,12 +42,8 @@ for f, t, s in delList:
     for i in range(f, t):
         if v[i] + box >= C:  # 트럭에 다 싣을수 없다면
             box = C-v[i]  # 트럭 여유공간
-        print(v)
-        print("delList", f, t, s, ", i:", i, ", box:", box)
     for i in range(f, t):
         v[i]+=box
-        print(v)
 
     cnt += box  # 배달 택배양 추가
-    print()
 print(cnt)
