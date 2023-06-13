@@ -36,13 +36,18 @@ while q:
 
     for k in range(4):
         nx,ny = x+dx[k],y+dy[k]
+        # 한 방향으로 쭉 감
         while 0<=nx<H and 0 <=ny<W:
-            if a[nx][ny] == '*':
+            if a[nx][ny] == '*':  # 벽
                 break
-            if dist[nx][ny] == -1:
-                dist[nx][ny]=dist[x][y]+1
+            if dist[nx][ny] == -1:  # 방문하지 않았다면
+                dist[nx][ny]=dist[x][y]+1  # 직선의 길이 +1
                 q.append((nx,ny))
             nx += dx[k]
             ny += dy[k]
 
+for i in range(H):
+    for j in range(W):
+        print(dist[i][j], end="  ")
+    print()
 print(dist[ex][ey]-1)
