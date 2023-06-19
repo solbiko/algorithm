@@ -20,16 +20,16 @@ input=sys.stdin.readline
 sys.setrecursionlimit(10**9)
 
 n,m=map(int,input().split())
-graph=[]
+board=[]  # 사무실
 cctv=[]
 for i in range(n):
     data = list(map(int, input().split()))
-    graph.append(data)
+    board.append(data)
     for j in range(m):
         if data[j] in [1, 2, 3, 4, 5]:
             cctv.append([data[j], i, j])
 
-min_value = sys.maxsize
+min_value = sys.maxsize  # 사각지대 최소크기
 
 # 네방향
 dr=[0,1,0,-1]
@@ -38,46 +38,47 @@ dc=[1,0,-1,0]
 # cctv 방향
 mode = [
     [],
-    [[0], [1], [2], [3]],
-    [[0, 2], [1, 3]],
-    [[0, 1], [1, 2], [2, 3], [0, 3]],
-    [[0, 1, 2], [0, 1, 3], [1, 2, 3], [0, 2, 3]],
-    [[0, 1, 2, 3]],]
+    [[0], [1], [2], [3]],  # 단방향
+    [[0, 2], [1, 3]],  # 반대 두방향
+    [[0, 1], [1, 2], [2, 3], [0, 3]],  # 90도 두방향
+    [[0, 1, 2], [0, 1, 3], [1, 2, 3], [0, 2, 3]],  # 90도 세방향
+    [[0, 1, 2, 3]],]  # 네방향
 
 
-def dfs(idx, graph):  # 탐색
+def dfs(idx, board):
     global min_value
-    
-    if idx == len(cctv):  # 탐색완료
+
+    # 전체 cctv 탐색완료
+    if idx == len(cctv):
         count = 0
-        for i in range(n):  # 사각지대 찾기
-            count += graph[i].count(0)
+        # 사각지대 카운트
+        for i in range(n):
+            count += board[i].count(0)
         min_value = min(min_value, count)
         return
 
-    graph_cp = copy.deepcopy(graph)  # 보드 복제
-    cctv_num, x, y = cctv[idx]  # 탐색할 cctv
-    for i in mode[cctv_num]:  # cctv의 방향에 따라서
-        for j in i:  # cctv 방향에 따라서
-            nx = x
-            ny = y
+    board_cp = copy.deepcopy(board)  # 사무실 복사
+    cctv_num, x, y = cctv[idx]
+
+    # cctv의 방향에 따라서 탐색
+    for i in mode[cctv_num]:
+        for j in i:
+            nx=x
+            ny=y
+            # 한 방향 계속 탐색
             while True:
-                nx += dr[j]
-                ny += dc[j]
-                # 범위를 넘어가면 중단
-                if nx < 0 or ny < 0 or nx >= n or ny >= m:
+                nx+=dr[j]
+                ny+=dc[j]
+                if nx < 0 or ny < 0 or nx >= n or ny >= m:  # 범위를 넘어가면 중단
                     break
-                # 벽이면 중단
-                if graph_cp[nx][ny] == 6:
+                if board_cp[nx][ny] == 6:  # 벽이면 중단
                     break
-                # 감시가능
-                elif graph_cp[nx][ny] == 0:
-                    graph_cp[nx][ny] = -1
+                elif board_cp[nx][ny] == 0:  # 감시가능
+                    board_cp[nx][ny] = '#'
 
-        dfs(idx+1, graph_cp)
-        graph_cp = copy.deepcopy(graph)  # 보드 초기화
+        dfs(idx+1, board_cp)
+        board_cp = copy.deepcopy(board)  # 보드 초기화
 
 
-dfs(0, graph)
+dfs(0, board)
 print(min_value)
-
