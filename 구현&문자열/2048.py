@@ -91,7 +91,6 @@ def move(dir):
 
 def dfs(cnt):
     global board, res
-    print(cnt)
     if cnt == 5:  # 보드 최댓값 찾기
         return max(map(max, board))
 
