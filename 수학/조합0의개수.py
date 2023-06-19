@@ -12,5 +12,13 @@ def count(x, k):
         cnt+=x
     return cnt
 
-print(min(count(n,5)-count(m,5)-count(n-m,5), count(n,2)-count(m,2)-count(n-m, 2)))
+# 끝자리가 0이라는 것은 10의 배수
+
+# 2 개수
+t=count(n,2)-count(m,2)-count(n-m, 2)
+
+# 5 개수
+f=count(n,5)-count(m,5)-count(n-m,5)
+
+print(min(f,t))
 
