@@ -2,16 +2,11 @@
 2048 게임은 보드의 크기가 N×N 이다. 보드의 크기와 보드판의 블록 상태가 주어졌을 때, 최대 5번 이동해서 만들 수 있는 가장 큰 블록의 값
 블록이 추가되는 경우는 없다
 이동하려고 하는 쪽의 칸이 먼저 합쳐진다. 예를 들어, 위로 이동시키는 경우에는 위쪽에 있는 블록이 먼저 합쳐지게 된다
+최대 5번 이동시켜서 얻을 수 있는 가장 큰 블록을 출력한다.
 3
 2 2 2
 4 4 4
 8 8 8
-
-0 2 4
-0 4 8
-0 8 16
-
-16
 """
 import sys, copy
 input=sys.stdin.readline
@@ -91,15 +86,18 @@ def move(dir):
 
 def dfs(cnt):
     global board, res
-    if cnt == 5:  # 보드 최댓값 찾기
-        return max(map(max, board))
-
+    if cnt == 5:
+        # 보드 최댓값 찾기
+        for i in range(n):
+            for j in range(n):
+                res = max(res, board[i][j])
+        return
 
     temp_a = copy.deepcopy(board)
     for i in range(4):  # 네방향으로 밀기
         move(i)
         dfs(cnt+1)
-        board = copy.deepcopy(temp_a)
+        board = copy.deepcopy(temp_a)  # 초기화
 
 dfs(0)
 print(res)
