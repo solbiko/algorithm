@@ -28,10 +28,10 @@ def bfs(x,y):
         a,b = queue.popleft()
         for i in range(4):
             nx, ny = a + dx[i], b + dy[i]
-            if 0<=nx<12 and 0 <=ny<6 and field[nx][ny] == field[x][y] and not visited[nx][ny]:
+            if 0<=nx<12 and 0 <=ny<6 and field[nx][ny] == field[x][y] and not visited[nx][ny]:  # 격자범위, 같은 뿌요이고 방문하지 않았으면
+                visited[nx][ny] = True
                 queue.append((nx, ny))
                 temp.append((nx, ny))
-                visited[nx][ny] = True
 
 def down():
     for i in range(6):
@@ -43,23 +43,24 @@ def down():
                     break
 
 
-cnt=0
+cnt=0  # 연쇄 카운트
 while True:
-    flag=True
+    flag=True  # 터뜨릴거 없는지 플래그  == 종료
     visited = [[False] * 6 for _ in range(12)]
     for i in range(12):
         for j in range(6):
-            if field[i][j]!='.' and not visited[i][j]:
+            if field[i][j]!='.' and not visited[i][j]:  # 방문하지 않은 뿌요
+                temp=[]  # 4개이상인지 확인하기위한 리스트
                 visited[i][j]=True
-                temp=[]
                 bfs(i,j)
-                if len(temp)>=4:  # 지우기
+                if len(temp)>=4:  # 터뜨리기
                     flag=False
                     for x, y in temp:
                         field[x][y] = "."
-    if flag:
+
+    if flag:  # 터뜨릴거 없으면 종료
         break
-    down()
+    down()  # 떨어뜨리기
     cnt+=1
 
 
