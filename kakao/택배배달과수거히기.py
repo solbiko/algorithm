@@ -9,23 +9,28 @@
 
 
 def solution(cap, n, deliveries, pickups):
-    deliveries = deliveries[::-1]
-    pickups = pickups[::-1]
     answer = 0
 
+    # 먼곳부터 배달하기위해 뒤집기
+    deliveries = deliveries[::-1]
+    pickups = pickups[::-1]
+    print("cap", cap)
+    print(deliveries, pickups)
+
+    # 배달해야 하는 양
     have_to_deli = 0
     have_to_pick = 0
 
     for i in range(n):
-        print(i)
+
         have_to_deli += deliveries[i]
         have_to_pick += pickups[i]
-        print(have_to_deli, have_to_pick)
 
-        while have_to_deli > 0 or have_to_pick > 0:
+        # 음수인 경우 : 직전 배달 거리에 포함되어 배달
+        while have_to_deli > 0 or have_to_pick > 0:  # 배달 할 거 있으면 배달하고 거리 더함
             have_to_deli -= cap
             have_to_pick -= cap
-            answer += (n - i) * 2
+            answer += (n-i) * 2
 
     return answer
 

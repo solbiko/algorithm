@@ -11,7 +11,6 @@ def solution(users, emoticons):
 
         # 각 유저
         for user_discount, user_money in users:
-            # print("user : ", user_discount, user_money)
 
             sold_emoticons = 0
 
@@ -21,7 +20,6 @@ def solution(users, emoticons):
                 # 사용자 할인율 기준보다 많이 할인하면 구매
                 if discount >= user_discount:
                     sold_emoticons += emoticon * (1 - discount / 100)
-                    # print("sold_emoticons", int(sold_emoticons))
 
 
             # 구매비용이 임티플러스 기준금액보다 크면 임티플러스 가입
