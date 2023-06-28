@@ -7,10 +7,7 @@
 미로를 탈출하기 위한 경로를 return
 미로를 탈출할 수 없는 경우 "impossible"
 """
-
-
 import sys
-input = sys.stdin.readline
 sys.setrecursionlimit(10**8)
 
 dAlpha = ['d', 'l', 'r', 'u']
@@ -19,17 +16,13 @@ dy = [0, -1, 1, 0]
 
 answer = "z"
 
-
 def dfs(n, m, x, y, r, c, prev_s, cnt, k):
     global answer
-
     if k-cnt < abs(x-r)+abs(y-c):  # 탈출이동거리 넘는경우
         return
-
     if x==r and y==c and cnt==k:  # 도착
         answer = prev_s
         return
-
     for i in range(4):
         nextX=x+dx[i]
         nextY=y+dy[i]
@@ -37,12 +30,10 @@ def dfs(n, m, x, y, r, c, prev_s, cnt, k):
             dfs(n, m, nextX, nextY, r, c, prev_s+dAlpha[i], cnt+1, k)
 
 
-
 def solution(n, m, x, y, r, c, k):
     dist = abs(x-r) + abs(y-c)  # 탈출 최단 거리
     if dist>k or (k-dist)%2==1:  # 탈출 도착 후, 2n 이동하면 제자리
         return "impossible"
-
     dfs(n, m, x, y, r, c, "", 0, k)
     return answer
 
