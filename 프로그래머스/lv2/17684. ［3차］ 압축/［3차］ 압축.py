@@ -3,12 +3,9 @@ from string import ascii_uppercase
 def solution(msg):
     answer = []
     
-    a = {}
-    t=1
-    for x in ascii_uppercase:
-        a[x]=t
-        t+=1
-       
+    c = [i for i in range(1,27)]
+    a= dict(zip(ascii_uppercase,c))
+    
     w=''
     for x in msg:
         w+=x
