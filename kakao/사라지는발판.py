@@ -45,8 +45,6 @@ def solution(board, aloc, bloc):
 
     return dfs(aloc, bloc)
 
-    return answer
-
 print(solution([[1, 1, 1], [1, 1, 1], [1, 1, 1]],	[1, 0],	[1, 2]))
 # print(solution([[1, 1, 1], [1, 0, 1], [1, 1, 1]],	[1, 0],	[1, 2]))
 # print(solution([[1, 1, 1, 1, 1]], [0, 0],	[0, 4]))
