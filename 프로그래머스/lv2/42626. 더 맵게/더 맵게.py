@@ -1,20 +1,17 @@
-from heapq import heappush, heappop
+from heapq import heapify, heappush, heappop
 
 def solution(scoville, K):
     cnt=0
 
-    h=[]
-    for x in scoville:
-        heappush(h,x)
+    heapify(scoville)
 
-    while h:
-        now=heappop(h)
-
-        if now<K:
-            if len(h)<1:
-                return -1
-            else:
-                sec=heappop(h)
-                heappush(h,now+sec*2)
-                cnt+=1
-        else: return cnt
+    while True:
+        now=heappop(scoville)
+        if now>=K:
+            break
+        if len(scoville)<1:
+            return -1
+        sec=heappop(scoville)
+        heappush(scoville,now+sec*2)
+        cnt+=1
+    return cnt
