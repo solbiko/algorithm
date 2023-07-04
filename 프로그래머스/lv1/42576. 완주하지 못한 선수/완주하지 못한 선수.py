@@ -4,6 +4,5 @@ def solution(participant, completion):
     dic1=Counter(participant)
     dic2=Counter(completion)
 
-    for x in dic1:
-        if dic1[x]-dic2[x]!=0:
-            return x
+    answer=dic1-dic2
+    return list(answer.keys())[0]
