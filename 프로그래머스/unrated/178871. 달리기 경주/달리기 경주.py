@@ -1,6 +1,5 @@
 def solution(players, callings):
-    
-    callings
+
     p={x:i+1 for i,x in enumerate(players)}
     r={i+1:x for i,x in enumerate(players)}
 
