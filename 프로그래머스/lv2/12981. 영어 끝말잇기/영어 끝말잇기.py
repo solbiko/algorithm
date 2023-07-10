@@ -22,3 +22,11 @@ def solution(n, words):
             d.add(x)
             pre=x
     return [0,0]
+
+
+def solution2(n, words):
+    for p in range(1, len(words)):
+        if words[p][0] != words[p-1][-1] or words[p] in words[:p]: 
+            return [(p%n)+1, (p//n)+1]
+    else:
+        return [0,0]
