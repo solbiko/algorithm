@@ -9,7 +9,8 @@ def solution(n, wires):
     
     visited=[False]*(n+1)
 
-    def BFS(v, tree):
+    def BFS(v, e):
+        del_wire=[[v,e], [e,v]]
         queue=[]
         visited[v]=True
         queue.append(v)
@@ -17,16 +18,13 @@ def solution(n, wires):
         while queue:
             now=queue.pop(0)
             visited[now]=True
-            for i in tree[now]:
-                if not visited[i]:
+            for i in g[now]:
+                if not visited[i] and [now,i] not in del_wire:
                     queue.append(i)
 
     for s,e in wires:
         visited=[False]*(n+1)
-        temp=copy.deepcopy(g)
-        temp[s].remove(e)
-        temp[e].remove(s)
-        BFS(s, temp)
+        BFS(s, e)
         answer = min(answer,abs(n-2*visited[1:].count(True)))
             
     return answer
