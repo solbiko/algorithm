@@ -1,4 +1,3 @@
-import copy
 from collections import deque
 dr=[0,1,0,-1]
 dc=[1,0,-1,0]
@@ -36,7 +35,7 @@ def solution(maps):
     for i in range(n):
         for j in range(m):
             if maps[i][j] != 'X' and not visited[i][j]:
-                total_cnt = copy.deepcopy(BFS(i,j)) # 총 식량
+                total_cnt =BFS(i,j) # 총 식량
                 answer.append(total_cnt)
                 
     if answer:
