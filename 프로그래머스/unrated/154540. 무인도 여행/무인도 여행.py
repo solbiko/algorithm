@@ -24,21 +24,12 @@ def solution(maps):
                 tempC=dc[d]
                 nextR= r+tempR
                 nextC= c+tempC
-                while 0<=nextR<n and 0<=nextC<m:
+                if 0<=nextR<n and 0<=nextC<m:
                     if not visited[nextR][nextC] and maps[nextR][nextC]!='X':
                         visited[nextR][nextC]=True # 방문 표시
                         cnt+=int(maps[nextR][nextC]) # 식량 수 카운트
                         queue.append([nextR,nextC])
-                    else:
-                        break
-                    if tempR<0:
-                        tempR-=1
-                    elif tempR>0:
-                        tempR+=1
-                    elif tempC<0:
-                        tempC-=1
-                    elif tempC>0:
-                        tempC+=1
+                  
         return cnt
 
     # 섬 구분
