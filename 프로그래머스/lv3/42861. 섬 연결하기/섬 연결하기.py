@@ -1,38 +1,23 @@
-from queue import PriorityQueue
-
 def solution(n, costs):
     answer = 0
-
-    q = PriorityQueue()
-
-    # 유니온파인드
-    arr = [0]*n # 인덱스 리스트
-    for i in range(n):
-        arr[i]=i
+    edges = sorted([(x[2], x[0], x[1]) for x in costs])
     
-    for s,e,cost in costs: # 에지 리스트
-        q.put((cost,s,e))
-        q.put((cost,e,s))
-
-    def find(a):  # 대표노드 찾기
+    arr = [i for i in range(n)]
+    def find(a):
         if a == arr[a]:
             return a
         else:
             arr[a] = find(arr[a])
             return arr[a]
-
-    def union(a, b):
-        a = find(a)
-        b = find(b)
-        if a != b:
-            arr[b] = a
-
+   
     useEdge = 0
-    while useEdge<n-1:
-        w,s,e=q.get()
+    for cost, s, e in edges:
         if find(s) != find(e):
-            union(s, e)
-            answer+=w
-            useEdge+=1
-
+            answer+=cost
+            arr[find(s)]=e
+            useEdge += 1
+        
+        if useEdge == n-1:
+            break
+            
     return answer
