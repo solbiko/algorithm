@@ -1,5 +1,16 @@
 def solution(s):
-    for i in range(len(s),0,-1): # 문자열 길이 긴 것 부터
-        for j in range(len(s)-i+1): # 문자열 시작 인덱스
-            if s[j:j+i] == s[j:j+i][::-1]:  
-                return i
+    answer = 0
+
+    if s == s[::-1]:
+        return len(s)
+
+    def pail(i, j):
+        while i >= 0 and j < len(s) and s[i] == s[j]:
+            i -= 1
+            j += 1
+        return len(s[i+1:j])
+    
+    for i in range(len(s)):
+        answer = max(answer, pail(i, i+1), pail(i, i+2))
+
+    return answer
