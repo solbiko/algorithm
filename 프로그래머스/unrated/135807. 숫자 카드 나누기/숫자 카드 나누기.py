@@ -1,22 +1,15 @@
-import sys,math
-def solution(arrayA, arrayB):
-    
-    def find(array): #최대공약수
-        GCD = 0
-        for i in range(len(array)):
-            GCD = math.gcd(GCD, array[i])
-        return GCD
-    
-    def check(array, g): # 다른 배열 나눌 수 있는지 체크
-        for x in array:
-            if x % g == 0:
-                return 0
-        return g
-    
-    gA=find(arrayA)
-    gB=find(arrayB)
-    
-    gA=check(arrayB, gA)
-    gB=check(arrayA, gB)
+from functools import reduce
+from math import gcd
 
-    return max((gA, gB))
+
+def solution(arrayA, arrayB):
+    gA, gB = reduce(gcd, arrayA), reduce(gcd, arrayB)
+    
+    answer = []
+    if all(each % gB for each in arrayA):
+        answer.append(gB)
+        
+    if all(each % gA for each in arrayB):
+        answer.append(gA)
+        
+    return max(answer) if answer else 0
