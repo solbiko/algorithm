@@ -22,6 +22,9 @@ def solution(board):
     q = deque([(sr, sc)])
     while q:
         
+        if dist[er][ec] != -1:
+            return dist[er][ec]
+
         r, c = q.popleft()
 
         for d in range(4):
@@ -33,4 +36,4 @@ def solution(board):
                 dist[nr][nc]=dist[r][c]+1
                 q.append((nr, nc))
 
-    return dist[er][ec]
+    return -1
