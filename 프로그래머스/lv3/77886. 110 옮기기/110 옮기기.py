@@ -13,16 +13,13 @@ def solution(s):
                 cnt+=1
             else:
                 stack.append(i)
+
+        idx=0
+        for s in stack[::-1]:
+            if s == '0':
+                break
+            else:
+                idx+=1
+        answer.append(''.join(stack[:len(stack)-idx]) + '110'*cnt + '1'*idx)
         
-        stack=''.join(stack)
-        # print(stack)
-        
-        idx = stack.find("111")  # 111 찾기
-        if idx == -1:  # 0뒤에 110 반복해 붙이기
-            idx = stack.rfind('0')
-            stack = stack[:idx+1] + "110"*cnt + stack[idx+1:]
-        else: # 111앞에 110 반복해 붙이기
-            stack = stack[:idx] + "110"*cnt + stack[idx:]
-        answer.append(stack)
-        
-    return answer 
+    return answer
