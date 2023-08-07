@@ -16,24 +16,21 @@ def solution(board):
             elif board[i][j]=='G':
                 er,ec=i,j
     
-    dist = [[INF]*m for _ in range(n)]
+    dist = [[-1]*m for _ in range(n)]
     dist[sr][sc] = 0
 
     q = deque([(sr, sc)])
     while q:
-    
-        if dist[er][ec] != INF:
-            return dist[er][ec]
-
-        r, c = q.popleft()
         
+        r, c = q.popleft()
+
         for d in range(4):
             nr,nc = r,c
             while 0 <= nr+dr[d]< n and 0 <=nc+dc[d]< m and board[nr+dr[d]][nc+dc[d]]!='D':
                 nr, nc = nr+dr[d], nc+dc[d]
                 
-            if  dist[r][c] < dist[nr][nc]:
+            if dist[nr][nc]==-1:
                 dist[nr][nc]=dist[r][c]+1
                 q.append((nr, nc))
 
-    return -1
+    return dist[er][ec]
