@@ -1,10 +1,9 @@
-from math import floor, sqrt, ceil
+from math import sqrt
+
 def solution(r1, r2):
-    
-    tmp=0
-    for x in range(1, r2+1):
-        y2= floor(sqrt(pow(r2, 2)-pow(x, 2)))
-        y1= ceil(sqrt(r1**2-x**2)) if r1 > x else 0
-        tmp+=y2-y1+1
-    
-    return tmp*4
+    quar = 0
+    for i in range(0, r1):
+        quar += int(sqrt(r2**2 - i**2)) - int(sqrt(r1**2 - i**2 - 1))
+    for i in range(r1, r2):
+        quar += int(sqrt(r2**2 - i**2))
+    return quar * 4
