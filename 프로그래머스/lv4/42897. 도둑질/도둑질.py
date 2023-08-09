@@ -1,6 +1,4 @@
 def solution(money):
-    answer = 0
-    
     dp = [0 for _ in range(len(money))] 
     dp[0] = money[0]
     dp[1] = money[0]
@@ -15,6 +13,3 @@ def solution(money):
         dp2[i] = max(dp2[i-2] + money[i], dp2[i-1])
 
     return max(max(dp), max(dp2))
-
-    
-    return answer
