@@ -1,25 +1,31 @@
 def solution(board):
-    # 선공이 "O", 후공이 "X"
+    x = sum(row.count('X') for row in board)
+    o = sum(row.count('O') for row in board)
 
-    o,x = sum([arr.count('O') for arr in board]), sum([arr.count('X') for arr in board])
-    if 0 <= o-x <= 1:
-        winO, winX = 0, 0
+    
+    def check_win(t):
+        # Check rows
+        for i in range(3):
+            if all(j==t for j in board[i]):
+                return True
 
-        # 가로, 세로        
-        board2 = [board[0][i]+board[1][i]+board[2][i] for i in range(3)]
-        for i, j in zip(board, board2):
-            if 'OOO' in [i,j]: winO += 1
-            if 'XXX' in [i,j]: winX += 1
+        # Check columns
+        for i in range(3):
+            if all(board[j][i] == t for j in range(3)):
+                return True
 
-        # 대각선
-        diagonal = [board[0][0] + board[1][1] + board[2][2], board[0][2] + board[1][1] + board[2][0]]
-        winO += diagonal.count('OOO')
-        winX += diagonal.count('XXX')
-        
-        print(winX, winO, x, o)
-        if winO and winX: return 0
-        if winO and winX==0 and o==x: return 0
-        if winO==0 and winX and o!=x: return 0
-        return 1
+        # Check diagonals
+        if all(board[i][i] == t for i in range(3)):
+            return True
+        if all(board[i][2-i] == t for i in range(3)):
+            return True
 
-    return 0
+        return False
+    
+    
+    if x-o>0 or abs(x-o)>1:
+        return 0
+    elif (check_win('O') and x==o) or (check_win('X') and x!=o):
+        return 0
+
+    return 1
