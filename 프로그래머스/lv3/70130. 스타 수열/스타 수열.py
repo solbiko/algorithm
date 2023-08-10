@@ -5,7 +5,7 @@ def solution(a):
     if len(a) <= 1:
         return 0
 
-    c=Counter(a)
+    c = {i: v for i, v in Counter(a).most_common()}
     
     for i in c:
         if c[i]*2 <= answer: # i의 등장 횟수가 공통인자 횟수 이하
