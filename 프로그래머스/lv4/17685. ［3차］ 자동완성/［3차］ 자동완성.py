@@ -21,11 +21,9 @@ class Trie(object):
     # 문자열 존재하는지 탐색
     def search(self, string):
         nowNode=self.parent
-        temp_length=0
         for char in string:
             if char in nowNode.childNode:
                 nowNode=nowNode.childNode[char]
-                temp_length+=1
             else:
                 return False
         if nowNode.wordCnt==1:
