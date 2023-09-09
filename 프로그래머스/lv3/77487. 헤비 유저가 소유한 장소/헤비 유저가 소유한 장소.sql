@@ -7,5 +7,3 @@ where HOST_ID in
     GROUP BY HOST_ID
     HAVING COUNT(ID) >= 2
 )
-    
-
