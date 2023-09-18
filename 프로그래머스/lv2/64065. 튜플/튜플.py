@@ -1,14 +1,9 @@
+import re
+from collections import Counter
 def solution(s):
-    answer = []
     
-    arr = s[2:-2].split("},{")
-    arr.sort(key=lambda x : len(x))
-
-    temp=set()
-    for x in arr:
-        xset = set(list(map(int, x.split(','))))
-        answer = answer + list(set.difference(xset, temp))
-        temp = xset
-
+    s = Counter(re.findall('\d+', s))
+    s = sorted(s.items(), key=lambda x: x[1], reverse=True)
     
-    return answer
+    return [int(k) for k, v in s]
+
