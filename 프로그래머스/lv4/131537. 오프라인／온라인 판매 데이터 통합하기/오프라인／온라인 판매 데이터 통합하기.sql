@@ -1,0 +1,16 @@
+select
+    DATE_FORMAT(SALES_DATE,'%Y-%m-%d') AS SALES_DATE
+    , PRODUCT_ID
+    , NULL AS USER_ID
+    , SALES_AMOUNT
+from OFFLINE_SALE
+WHERE DATE_FORMAT(sales_date, '%m') = '03'
+union all
+select
+    DATE_FORMAT(SALES_DATE,'%Y-%m-%d') AS SALES_DATE
+    , PRODUCT_ID
+    , USER_ID
+  , SALES_AMOUNT
+from ONLINE_SALE
+WHERE DATE_FORMAT(sales_date, '%m') = '03'
+ORDER BY 1 ASC , 2 ASC, 3 ASC;
