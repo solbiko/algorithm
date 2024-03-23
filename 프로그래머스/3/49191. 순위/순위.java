@@ -1,51 +1,41 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+
 class Solution {
     public int solution(int n, int[][] results) {
         int answer = 0;
         
         
-        boolean[][] graph = new boolean[n][n];
+        int[][] graph = new int[n][n];
         for (int[] edge: results){
             int u = edge[0]-1;
             int v = edge[1]-1;
-            graph[u][v] = true;
+            graph[u][v] = 1;
+            graph[v][u] = -1;
         }
         
         
-        for(int u=0; u<n; u++){
-            int wins = countForward(u, graph, new boolean[n]) -1;
-            int loses = countBackward(u, graph, new boolean[n]) -1;
-            
-            if (wins+loses+1==n){
-                answer++;
+        for(int k=0; k<n; k++){
+            for (int s =0; s<n; s++){
+                for (int e=0; e<n; e++){
+                    if (graph[s][k]==1 && graph[k][e]==1){
+                        graph[s][e]=1;
+                        graph[e][s]=-1;
+                    }
+                }
             }
+        }
 
+        for(int[] row : graph){
+            List<Integer> intList= Arrays.stream(row).boxed().collect(Collectors.toList());
+            int numOfZero = Collections.frequency(intList, 0);
+            if (numOfZero == 1)
+                answer += 1;
         }
         
         return answer;
     }
-    
-    private int countForward(int u, boolean[][] graph, boolean[] visited){ // 이긴 수
-        int cnt = 1;
-        
-        for(int v=0; v<graph[u].length; v++){
-            if (!graph[u][v] || visited[v]) continue;
-            visited[v] = true;
-            cnt+= countForward(v, graph, visited);
-        }
-        return cnt;
-    }
-    
-        private int countBackward(int u, boolean[][] graph, boolean[] visited){ // 진 수
-        int cnt = 1;
-        
-        for(int v=0; v<graph.length; v++){
-            if (!graph[v][u] || visited[v]) continue;
-            visited[v] = true;
-            cnt+= countBackward(v, graph, visited);
-        }
-        return cnt;
-    }
-    
-    
+
     
 }
